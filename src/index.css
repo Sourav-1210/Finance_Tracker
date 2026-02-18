@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode tokens */
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-elevated-soft: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-subtle: rgba(15, 23, 42, 0.06);
+  }
+
+  html.dark {
+    /* DARK MODE - Deep fintech navy theme */
+    --bg-body: #0B0F19; /* main app background */
+    --bg-card: #121826; /* cards & panels */
+    --bg-elevated-soft: #121826;
+    --text-primary: #E6EDF3; /* primary text */
+    --text-secondary: #9AA4B2; /* secondary / muted text */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --accent-teal: #06b6d4;
+    --accent-blue: #22d3ee;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: var(--bg-body);
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* PERFECT DARK MODE - applied when <html> has .dark (ThemeContext) */
+  .dark body {
+    background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.06), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.07), transparent 60%),
+                var(--bg-body);
+    color: var(--text-primary);
+  }
+
+  /* Text hierarchy in DARK MODE */
+  .dark body h1,
+  .dark body h2,
+  .dark body h3,
+  .dark body h4,
+  .dark body h5,
+  .dark body h6 {
+    color: var(--text-primary) !important;
+  }
+
+  .dark body p,
+  .dark body span,
+  .dark body label {
+    color: var(--text-secondary) !important;
+  }
+
+  .dark body a {
+    color: #60a5fa !important;
+  }
+
+  .dark body a:hover {
+    color: #93c5fd !important;
+  }
+
+  /* Scrollbar - Modern style */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-500 rounded-full;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #22d3ee, #6366f1);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-600;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #06b6d4, #4f46e5);
+  }
+}
+
+@layer components {
+
+  /* CARDS - Solid, clean fintech design */
+  .glass-card {
+    @apply rounded-xl border shadow-glass;
+    background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.08), transparent 60%),
+                var(--bg-card);
+    border-color: var(--border-subtle);
+  }
+
+  .dark .glass-card {
+    background:
+      radial-gradient(circle at top left, rgba(34, 211, 238, 0.08), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.10), transparent 65%),
+      var(--bg-card);
+    border-color: var(--border-subtle);
+    box-shadow:
+      0 22px 45px rgba(0, 0, 0, 0.75),
+      0 0 0 1px rgba(148, 163, 184, 0.1);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-200 hover:shadow-xl;
+  }
+
+  .dark .glass-card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .dark .glass-card-hover:hover {
+    background:
+      radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 65%),
+      var(--bg-card);
+    border-color: rgba(148, 163, 184, 0.35);
+    box-shadow:
+      0 26px 60px rgba(0, 0, 0, 0.85),
+      0 0 0 1px rgba(148, 163, 184, 0.45);
+    transform: translateY(-3px);
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg transform-gpu hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .dark .btn-primary {
+    background-image: linear-gradient(135deg, #22c55e, #22d3ee);
+    box-shadow: 0 14px 35px rgba(16, 185, 129, 0.45);
+  }
+
+  .dark .btn-primary:hover {
+    background-image: linear-gradient(135deg, #16a34a, #0ea5e9);
+    box-shadow: 0 18px 45px rgba(16, 185, 129, 0.6);
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg transform-gpu hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  /* INPUTS & SEARCH - Perfect visibility */
+  .input-fintech {
+    @apply w-full px-4 py-3 rounded-2xl border-2 border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200 outline-none;
+  }
+
+  .dark .input-fintech {
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+    background:
+      linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98)),
+      radial-gradient(circle at top left, rgba(34, 211, 238, 0.08), transparent 55%);
+    box-shadow:
+      0 0 0 1px rgba(15, 23, 42, 0.9),
+      0 18px 45px rgba(15, 23, 42, 0.9);
+  }
+
+  /* SELECT - Glassmorphism dropdown */
+  .select-fintech {
+    @apply w-full px-4 py-3 rounded-2xl border-2 border-gray-200/80 bg-white/95 text-gray-900 shadow-sm outline-none transition-all duration-200;
+  }
+
+  .dark .select-fintech {
+    background: rgba(18, 24, 38, 0.9);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #E6EDF3;
+    box-shadow:
+      0 18px 45px rgba(15, 23, 42, 0.9),
+      0 0 0 1px rgba(15, 23, 42, 0.9);
+  }
+
+  .select-fintech:focus {
+    @apply border-primary-500 ring-2 ring-primary-500/20;
+  }
+
+  .dark .select-fintech:focus {
+    border-color: rgba(56, 189, 248, 0.8);
+    box-shadow:
+      0 0 0 1px rgba(56, 189, 248, 0.8),
+      0 0 0 8px rgba(15, 23, 42, 0.8);
+  }
+
+  .dark .input-fintech::placeholder {
+    color: #64748b;
+  }
+
+  .dark .input-fintech:focus {
+    border-color: rgba(56, 189, 248, 0.7);
+    box-shadow:
+      0 0 0 1px rgba(56, 189, 248, 0.7),
+      0 0 0 8px rgba(56, 189, 248, 0.15),
+      0 22px 55px rgba(15, 23, 42, 0.95);
+  }
+
+  /* TEXT GRADIENT */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent;
+  }
+
+  .dark .text-gradient {
+    background: linear-gradient(135deg, #22d3ee, #6366f1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 14px rgba(34, 211, 238, 0.35);
+  }
+
+  /* Minimal heading glow for key titles */
+  .heading-glow {
+    letter-spacing: 0.04em;
+  }
+
+  .dark .heading-glow {
+    text-shadow:
+      0 0 10px rgba(34, 211, 238, 0.22),
+      0 0 24px rgba(79, 70, 229, 0.32);
+  }
+
+  /* Small reusable hover lift */
+  .hover-lift-sm {
+    @apply transition-transform duration-200 ease-out transform-gpu hover:-translate-y-0.5;
+  }
+
+  /* NAV LINKS - subtle glow in dark mode */
+  .nav-link {
+    border-radius: 0.75rem;
+  }
+
+  .dark .nav-link span {
+    color: #a5b4fc !important; /* soft indigo for inactive items */
+    text-shadow: 0 0 6px rgba(79, 70, 229, 0.35);
+  }
+
+  .dark .nav-link-active {
+    background-image: linear-gradient(135deg, #22c55e, #22d3ee);
+    box-shadow:
+      0 0 18px rgba(34, 211, 238, 0.4),
+      0 0 1px rgba(148, 163, 184, 0.6);
+  }
+
+  .dark .nav-link-active span {
+    color: #E6EDF3 !important; /* primary text */
+    text-shadow:
+      0 0 10px rgba(34, 211, 238, 0.45),
+      0 0 20px rgba(56, 189, 248, 0.55);
+  }
+
+  /* PROFILE DROPDOWN - premium fintech dark mode */
+  .profile-dropdown {
+    @apply rounded-2xl border shadow-glass-lg bg-white/95 backdrop-blur-xl;
+  }
+
+  .dark .profile-dropdown {
+    background: rgba(18, 24, 38, 0.95); /* #121826 with 95% opacity */
+    border-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.9),
+      0 0 0 1px rgba(15, 23, 42, 0.7);
+  }
+
+  .profile-dropdown-item {
+    @apply w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-200;
+  }
+
+  .dark .profile-dropdown-item {
+    color: #9AA4B2; /* secondary text */
+  }
+
+  .dark .profile-dropdown-item:hover {
+    background-color: #1A2233;
+    color: #E6EDF3; /* primary text on hover */
+  }
+
+  .dark .profile-dropdown-item-icon {
+    color: #9AA4B2;
+  }
+
+  .dark .profile-dropdown-item:hover .profile-dropdown-item-icon {
+    color: #E6EDF3;
+  }
+
+  .profile-dropdown-header-name {
+    font-weight: 700;
+  }
+
+  .dark .profile-dropdown-header-name {
+    color: #E6EDF3 !important;
+  }
+
+  .profile-dropdown-header-email {
+    font-size: 0.75rem;
+  }
+
+  .dark .profile-dropdown-header-email {
+    color: #9AA4B2 !important;
+  }
+
+  /* SHADOWS */
+  .shadow-glass {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .shadow-glass {
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+  }
+
+  .shadow-glass-lg {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark .shadow-glass-lg {
+    box-shadow:
+      0 26px 70px rgba(15, 23, 42, 1),
+      0 0 0 1px rgba(148, 163, 184, 0.25);
+  }
+
+  .shadow-glow-green {
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .dark .shadow-glow-green {
+    box-shadow: 0 10px 32px rgba(16, 185, 129, 0.45);
+  }
+
+  .shadow-glow-purple {
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+  }
+
+  .dark .shadow-glow-purple {
+    box-shadow: 0 10px 32px rgba(129, 140, 248, 0.45);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.2s ease-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 20%, #f0f0f0 40%, #f0f0f0 100%);
+    background-size: 1000px 100%;
+  }
+
+  .dark .animate-shimmer {
+    background: linear-gradient(to right, #020617 0%, #1e293b 20%, #020617 40%, #020617 100%);
+    background-size: 1000px 100%;
+  }
+}
