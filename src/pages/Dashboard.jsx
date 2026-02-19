@@ -9,6 +9,7 @@ import { MonthlyBarChart } from '../components/MonthlyBarChart';
 import { FloatingActionButton } from '../components/FloatingActionButton';
 import { AddTransactionModal } from '../components/AddTransactionModal';
 import { ConfirmationModal } from '../components/ConfirmationModal';
+import { BudgetSummary } from '../components/BudgetSummary';
 
 export const Dashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +30,6 @@ export const Dashboard = () => {
     const confirmDelete = async () => {
         if (deleteTransaction) {
             const { deleteTransaction: deleteFunc } = await import('../context/TransactionContext');
-            // The actual delete will be handled by the TransactionContext
             setDeleteTransaction(null);
         }
     };
@@ -45,38 +45,35 @@ export const Dashboard = () => {
             <Navbar />
 
             <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
-                {/* Summary Cards */}
+
                 <SummaryCards />
 
-                {/* Filter & Search */}
+                <BudgetSummary />
+
                 <FilterSearch />
 
-                {/* Two Column Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Left Column: Charts */}
                     <div className="lg:col-span-2 space-y-8">
                         <MonthlyBarChart />
                         <SpendingPieChart />
                     </div>
 
-                    {/* Right Column: Transaction List */}
                     <div className="lg:col-span-1">
                         <TransactionList onEdit={handleEdit} onDelete={handleDelete} />
                     </div>
                 </div>
             </main>
 
-            {/* Floating Action Button */}
+
             <FloatingActionButton onClick={() => setIsModalOpen(true)} />
 
-            {/* Add/Edit Transaction Modal */}
+
             <AddTransactionModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 editTransaction={editTransaction}
             />
 
-            {/* Delete Confirmation Modal */}
             <ConfirmationModal
                 isOpen={showDeleteConfirm}
                 onClose={() => setShowDeleteConfirm(false)}

@@ -17,7 +17,7 @@ export const Signup = () => {
         e.preventDefault();
         setError('');
 
-        // Validation
+        
         if (password.length < 6) {
             setError('Password must be at least 6 characters long');
             return;
@@ -56,14 +56,14 @@ export const Signup = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden animate-fade-in">
-            {/* Floating Background Shapes */}
+            
             <div className="absolute top-20 right-10 w-72 h-72 bg-accent-400/20 rounded-full blur-3xl animate-float"></div>
             <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
             <div className="absolute top-1/2 right-1/2 w-80 h-80 bg-primary-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
 
-            {/* Signup Card */}
+            
             <div className="glass-card max-w-md w-full p-8 md:p-10 rounded-2xl shadow-glass-lg animate-slide-up relative z-10">
-                {/* Logo and Header */}
+                
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-accent-500 to-accent-600 rounded-2xl mb-4 shadow-glow-purple">
                         <AiFillDollarCircle className="text-white text-3xl" />
@@ -76,16 +76,16 @@ export const Signup = () => {
                     </p>
                 </div>
 
-                {/* Error Message */}
+                
                 {error && (
                     <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl text-red-700 dark:text-red-400 text-sm animate-slide-down">
                         {error}
                     </div>
                 )}
 
-                {/* Signup Form */}
+                
                 <form onSubmit={handleEmailSignup} className="space-y-5">
-                    {/* Email Input */}
+                    
                     <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                             <HiMail className="text-xl" />
@@ -100,7 +100,7 @@ export const Signup = () => {
                         />
                     </div>
 
-                    {/* Password Input */}
+                    
                     <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                             <HiLockClosed className="text-xl" />
@@ -115,7 +115,7 @@ export const Signup = () => {
                         />
                     </div>
 
-                    {/* Confirm Password Input */}
+                    
                     <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                             <HiLockClosed className="text-xl" />
@@ -130,7 +130,7 @@ export const Signup = () => {
                         />
                     </div>
 
-                    {/* Submit Button */}
+                    
                     <button
                         type="submit"
                         disabled={loading}
@@ -140,7 +140,7 @@ export const Signup = () => {
                     </button>
                 </form>
 
-                {/* Divider */}
+                
                 <div className="relative my-6">
                     <div className="absolute inset-0 flex items-center">
                         <div className="w-full border-t border-gray-300 dark:border-gray-700"></div>
@@ -152,7 +152,7 @@ export const Signup = () => {
                     </div>
                 </div>
 
-                {/* Google Sign In */}
+                
                 <button
                     onClick={handleGoogleSignup}
                     disabled={loading}
@@ -164,7 +164,7 @@ export const Signup = () => {
                     </span>
                 </button>
 
-                {/* Login Link */}
+                
                 <p className="text-center mt-6 text-gray-600 dark:text-gray-400">
                     Already have an account?{' '}
                     <Link

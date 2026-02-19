@@ -57,16 +57,16 @@ export const Profile = () => {
             <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
                 <h1 className="text-4xl font-bold text-gradient heading-glow mb-8">My Profile</h1>
 
-                {/* Profile Card */}
+                
                 <div className="glass-card p-8 rounded-2xl mb-6">
-                    {/* Avatar Section */}
+                    
                     <div className="flex flex-col md:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-                        {/* Avatar */}
+                        
                         <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-5xl font-bold shadow-glow-green">
                             {user?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase()}
                         </div>
 
-                        {/* User Info */}
+                        
                         <div className="flex-1 text-center md:text-left">
                             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                                 {user?.displayName || 'User'}
@@ -81,7 +81,7 @@ export const Profile = () => {
                         </div>
                     </div>
 
-                    {/* Message */}
+                    
                     {message.text && (
                         <div
                             className={`mb-6 p-4 rounded-xl ${message.type === 'success'
@@ -93,7 +93,7 @@ export const Profile = () => {
                         </div>
                     )}
 
-                    {/* Edit Profile Form */}
+                    
                     {isEditing ? (
                         <form onSubmit={handleUpdateProfile} className="space-y-4">
                             <div>
@@ -140,14 +140,14 @@ export const Profile = () => {
                     )}
                 </div>
 
-                {/* Account Information */}
+                
                 <div className="glass-card p-8 rounded-2xl">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                         Account Information
                     </h3>
 
                     <div className="space-y-4">
-                        {/* Email */}
+                        
                         <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50">
                             <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
                                 <HiMail className="text-2xl" />
@@ -158,7 +158,7 @@ export const Profile = () => {
                             </div>
                         </div>
 
-                        {/* Display Name */}
+                        
                         <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50">
                             <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
                                 <HiUser className="text-2xl" />
@@ -171,7 +171,7 @@ export const Profile = () => {
                             </div>
                         </div>
 
-                        {/* Account Created */}
+                        
                         <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50">
                             <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
                                 <HiCalendar className="text-2xl" />
@@ -182,7 +182,7 @@ export const Profile = () => {
                             </div>
                         </div>
 
-                        {/* Last Sign In */}
+                        
                         <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50">
                             <div className="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
                                 <HiCalendar className="text-2xl" />

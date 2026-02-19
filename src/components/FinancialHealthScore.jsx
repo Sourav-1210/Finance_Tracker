@@ -53,7 +53,7 @@ export const FinancialHealthScore = () => {
     };
 
     const statusColors = getStatusColor(health.status);
-    const circumference = 2 * Math.PI * 70; // radius = 70
+    const circumference = 2 * Math.PI * 70; 
     const strokeDashoffset = circumference - (health.score / 100) * circumference;
 
     return (
@@ -63,10 +63,8 @@ export const FinancialHealthScore = () => {
             </h3>
 
             <div className="flex flex-col items-center justify-center py-4">
-                {/* Circular Progress */}
                 <div className="relative w-48 h-48">
                     <svg className="transform -rotate-90 w-48 h-48">
-                        {/* Background circle */}
                         <circle
                             cx="96"
                             cy="96"
@@ -76,7 +74,6 @@ export const FinancialHealthScore = () => {
                             fill="transparent"
                             className="text-gray-200 dark:text-gray-700"
                         />
-                        {/* Progress circle */}
                         <circle
                             cx="96"
                             cy="96"
@@ -89,7 +86,6 @@ export const FinancialHealthScore = () => {
                             strokeLinecap="round"
                             className="transition-all duration-1000 ease-out"
                         />
-                        {/* Gradient definition */}
                         <defs>
                             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" className={statusColors.bg.includes('green') ? 'text-green-500' : statusColors.bg.includes('primary') ? 'text-primary-500' : statusColors.bg.includes('yellow') ? 'text-yellow-500' : statusColors.bg.includes('orange') ? 'text-orange-500' : 'text-red-500'} stopColor="currentColor" />
@@ -98,7 +94,6 @@ export const FinancialHealthScore = () => {
                         </defs>
                     </svg>
 
-                    {/* Score text in center */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                         <p className={`text-5xl font-bold ${statusColors.text}`}>
                             {health.score}
@@ -109,14 +104,12 @@ export const FinancialHealthScore = () => {
                     </div>
                 </div>
 
-                {/* Status badge */}
                 <div className={`mt-6 px-6 py-2.5 rounded-full bg-gradient-to-r ${statusColors.bg} shadow-lg`}>
                     <p className="text-white font-semibold text-sm">
                         {statusColors.label}
                     </p>
                 </div>
 
-                {/* Savings rate */}
                 <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl w-full">
                     <div className="flex items-center justify-between">
                         <p className="text-sm text-gray-600 dark:text-gray-400">

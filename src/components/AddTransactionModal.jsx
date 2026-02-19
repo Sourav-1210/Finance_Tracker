@@ -41,7 +41,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    // Populate form if editing
     useEffect(() => {
         if (editTransaction) {
             setFormData({
@@ -107,15 +106,12 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center px-4 py-8 sm:p-4 animate-fade-in">
-            {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/60 backdrop-blur-md"
                 onClick={onClose}
             ></div>
 
-            {/* Modal */}
             <div className="glass-card max-w-md w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 rounded-2xl shadow-glass-lg relative z-10 animate-slide-up">
-                {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-gradient">
                         {editTransaction ? 'Edit Transaction' : 'Add Transaction'}
@@ -128,16 +124,13 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                     </button>
                 </div>
 
-                {/* Error Message */}
                 {error && (
                     <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl text-red-700 dark:text-red-400 text-sm">
                         {error}
                     </div>
                 )}
 
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Title / Source */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                             {formData.type === 'income' ? 'Income Title / Source' : 'Title'}
@@ -156,7 +149,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         />
                     </div>
 
-                    {/* Amount */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                             Amount
@@ -178,7 +170,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         </div>
                     </div>
 
-                    {/* Category + Icon (Income) / Category (Expense) */}
                     <div>
                         <div className="flex items-center justify-between mb-2">
                             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
@@ -248,7 +239,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         )}
                     </div>
 
-                    {/* Type */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                             Type
@@ -289,7 +279,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         </div>
                     </div>
 
-                    {/* Date */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                             Date
@@ -303,7 +292,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         />
                     </div>
 
-                    {/* Payment Method (Income only) */}
                     {formData.type === 'income' && (
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -332,7 +320,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         </div>
                     )}
 
-                    {/* Recurring Toggle (Income only) */}
                     {formData.type === 'income' && (
                         <div className="flex items-center justify-between gap-3">
                             <div>
@@ -363,7 +350,6 @@ export const AddTransactionModal = ({ isOpen, onClose, editTransaction }) => {
                         </div>
                     )}
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={loading}

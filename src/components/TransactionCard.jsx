@@ -39,7 +39,6 @@ export const TransactionCard = ({ transaction, onEdit, onDelete }) => {
     return (
         <div className="glass-card-hover p-4 rounded-xl animate-slide-up hover-lift-sm">
             <div className="flex items-center justify-between">
-                {/* Left: Icon and Details */}
                 <div className="flex items-center gap-4 flex-1">
                     <div className={`p-3 rounded-xl ${type === 'income'
                         ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
@@ -60,7 +59,6 @@ export const TransactionCard = ({ transaction, onEdit, onDelete }) => {
                     </div>
                 </div>
 
-                {/* Right: Amount and Actions */}
                 <div className="flex items-center gap-4">
                     <span className={`text-xl font-bold ${type === 'income'
                         ? 'text-green-600 dark:text-green-400'
@@ -69,7 +67,6 @@ export const TransactionCard = ({ transaction, onEdit, onDelete }) => {
                         {type === 'income' ? '+' : '-'}₹{Math.abs(amount).toLocaleString()}
                     </span>
 
-                    {/* Action Buttons */}
                     <div className="flex items-center gap-2">
                         <button
                             onClick={() => onEdit(transaction)}

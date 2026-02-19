@@ -6,7 +6,7 @@ export const useCounter = (end, duration = 600, start = 0) => {
     useEffect(() => {
         if (start === end) return;
 
-        const increment = (end - start) / (duration / 16); // 60fps
+        const increment = (end - start) / (duration / 16); 
         let current = start;
 
         const timer = setInterval(() => {

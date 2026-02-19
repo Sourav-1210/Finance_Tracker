@@ -13,7 +13,6 @@ export const Analytics = () => {
             <Navbar />
 
             <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
-                {/* Page Header */}
                 <div className="mb-8">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-glow-green">
@@ -28,25 +27,20 @@ export const Analytics = () => {
                     </p>
                 </div>
 
-                {/* Insights Cards */}
                 <div className="mb-8">
                     <InsightsCard />
                 </div>
 
-                {/* Two Column Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                    {/* Left Column: Charts */}
                     <div className="lg:col-span-2">
                         <TrendLineChart />
                     </div>
 
-                    {/* Right Column: Financial Health */}
                     <div className="lg:col-span-1">
                         <FinancialHealthScore />
                     </div>
                 </div>
 
-                {/* Top Categories Section */}
                 <div className="mb-8">
                     <TopCategoriesCard />
                 </div>

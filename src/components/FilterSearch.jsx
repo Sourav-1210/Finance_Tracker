@@ -46,7 +46,6 @@ export const FilterSearch = () => {
                     />
                 </div>
 
-                {/* Category Filter */}
                 <div className="relative md:w-64">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-300 pointer-events-none">
                         <MdFilterList className="text-xl" />
@@ -69,7 +68,6 @@ export const FilterSearch = () => {
                 </div>
             </div>
 
-            {/* Type Filter Pills */}
             <div className="mt-3 flex flex-wrap gap-2">
                 {['all', 'income', 'expense'].map((type) => (
                     <button

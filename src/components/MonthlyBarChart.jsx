@@ -36,7 +36,6 @@ export const MonthlyBarChart = () => {
             }
         });
 
-        // Get last 6 months
         const sortedMonths = Object.keys(months).sort().slice(-6);
 
         return {

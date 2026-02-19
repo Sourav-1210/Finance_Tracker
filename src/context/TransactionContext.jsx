@@ -18,7 +18,6 @@ export const TransactionProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [typeFilter, setTypeFilter] = useState('all');
 
-    // Subscribe to real-time transaction updates
     useEffect(() => {
         if (!user) {
             setTransactions([]);
@@ -35,23 +34,19 @@ export const TransactionProvider = ({ children }) => {
         return () => unsubscribe();
     }, [user]);
 
-    // Filter transactions based on search and category
     useEffect(() => {
         let filtered = [...transactions];
 
-        // Apply search filter
         if (searchTerm) {
             filtered = filtered.filter((t) =>
                 t.title.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
-        // Apply category filter
         if (categoryFilter !== 'all') {
             filtered = filtered.filter((t) => t.category === categoryFilter);
         }
 
-        // Apply type filter
         if (typeFilter !== 'all') {
             filtered = filtered.filter((t) => t.type === typeFilter);
         }
@@ -59,7 +54,6 @@ export const TransactionProvider = ({ children }) => {
         setFilteredTransactions(filtered);
     }, [transactions, searchTerm, categoryFilter, typeFilter]);
 
-    // Add new transaction
     const addTransaction = async (transactionData) => {
         if (!user) return { error: 'User not authenticated' };
 
@@ -67,7 +61,6 @@ export const TransactionProvider = ({ children }) => {
         return { id, error };
     };
 
-    // Update transaction
     const updateTransaction = async (transactionId, transactionData) => {
         if (!user) return { error: 'User not authenticated' };
 
@@ -75,7 +68,6 @@ export const TransactionProvider = ({ children }) => {
         return { error };
     };
 
-    // Delete transaction
     const deleteTransaction = async (transactionId) => {
         if (!user) return { error: 'User not authenticated' };
 
@@ -83,7 +75,6 @@ export const TransactionProvider = ({ children }) => {
         return { error };
     };
 
-    // Calculate totals
     const getTotals = () => {
         const income = filteredTransactions
             .filter((t) => t.type === 'income')
@@ -100,7 +91,6 @@ export const TransactionProvider = ({ children }) => {
         };
     };
 
-    // Get category breakdown for charts
     const getCategoryData = () => {
         const categoryMap = {};
 
@@ -117,19 +107,16 @@ export const TransactionProvider = ({ children }) => {
         return categoryMap;
     };
 
-    // Get monthly trends for last 12 months
     const getMonthlyTrends = () => {
         const months = {};
         const now = new Date();
 
-        // Initialize last 12 months
         for (let i = 11; i >= 0; i--) {
             const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
             const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
             months[monthKey] = { income: 0, expense: 0 };
         }
 
-        // Aggregate transaction data
         transactions.forEach((t) => {
             if (!t.date) return;
             const date = new Date(t.date);
@@ -147,7 +134,6 @@ export const TransactionProvider = ({ children }) => {
         return months;
     };
 
-    // Get top spending categories
     const getTopCategories = (limit = 5) => {
         const categoryMap = {};
         let totalExpense = 0;
@@ -174,7 +160,6 @@ export const TransactionProvider = ({ children }) => {
             .slice(0, limit);
     };
 
-    // Calculate financial health metrics
     const getFinancialHealth = () => {
         const totals = getTotals();
         const savingsRate = totals.income > 0
@@ -185,19 +170,19 @@ export const TransactionProvider = ({ children }) => {
         let status = 'critical';
 
         if (savingsRate >= 30) {
-            healthScore = 90 + (savingsRate - 30) / 7; // 90-100
+            healthScore = 90 + (savingsRate - 30) / 7; 
             status = 'excellent';
         } else if (savingsRate >= 20) {
-            healthScore = 75 + (savingsRate - 20) * 1.5; // 75-90
+            healthScore = 75 + (savingsRate - 20) * 1.5; 
             status = 'good';
         } else if (savingsRate >= 10) {
-            healthScore = 60 + (savingsRate - 10) * 1.5; // 60-75
+            healthScore = 60 + (savingsRate - 10) * 1.5; 
             status = 'fair';
         } else if (savingsRate >= 0) {
-            healthScore = 30 + savingsRate * 3; // 30-60
+            healthScore = 30 + savingsRate * 3; 
             status = 'warning';
         } else {
-            healthScore = Math.max(0, 30 + savingsRate); // 0-30
+            healthScore = Math.max(0, 30 + savingsRate); 
             status = 'critical';
         }
 
@@ -208,7 +193,7 @@ export const TransactionProvider = ({ children }) => {
         };
     };
 
-    // Generate insights from transaction data
+    
     const getInsights = () => {
         if (transactions.length === 0) {
             return {
@@ -226,7 +211,6 @@ export const TransactionProvider = ({ children }) => {
         const avgMonthlyIncome = months.reduce((sum, m) => sum + m.income, 0) / months.length;
         const avgMonthlyExpense = months.reduce((sum, m) => sum + m.expense, 0) / months.length;
 
-        // Find highest spending month
         let highestMonth = { key: '', expense: 0 };
         Object.entries(monthlyData).forEach(([key, data]) => {
             if (data.expense > highestMonth.expense) {

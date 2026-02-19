@@ -12,7 +12,6 @@ export const LoadingSkeleton = () => {
                 <div className="h-6 w-24 bg-gray-300 dark:bg-[#111827] rounded"></div>
             </div>
 
-            {/* Shimmer Effect */}
             <div className="pointer-events-none absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent"></div>
         </div>
     );

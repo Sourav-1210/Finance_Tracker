@@ -4,13 +4,11 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
     const [isDark, setIsDark] = useState(() => {
-        // Check localStorage for saved theme preference
         const saved = localStorage.getItem('theme');
         return saved === 'dark';
     });
 
     useEffect(() => {
-        // Apply theme to document
         if (isDark) {
             document.documentElement.classList.add('dark');
             localStorage.setItem('theme', 'dark');

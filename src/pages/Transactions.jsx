@@ -48,24 +48,24 @@ export const Transactions = () => {
                     All Transactions
                 </h1>
 
-                {/* Filter & Search */}
+                
                 <FilterSearch />
 
-                {/* Transaction List */}
+                
                 <TransactionList onEdit={handleEdit} onDelete={handleDelete} />
             </main>
 
-            {/* Floating Action Button */}
+            
             <FloatingActionButton onClick={() => setIsModalOpen(true)} />
 
-            {/* Add/Edit Transaction Modal */}
+            
             <AddTransactionModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 editTransaction={editTransaction}
             />
 
-            {/* Delete Confirmation Modal */}
+            
             <ConfirmationModal
                 isOpen={showDeleteConfirm}
                 onClose={() => setShowDeleteConfirm(false)}

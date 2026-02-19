@@ -6,7 +6,7 @@ import { logOut } from '../firebase/auth';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import { HiMoon, HiSun, HiChevronDown } from 'react-icons/hi';
 import { FiLogOut, FiUser } from 'react-icons/fi';
-import { MdDashboard, MdReceipt, MdAnalytics } from 'react-icons/md';
+import { MdDashboard, MdReceipt, MdAnalytics, MdAccountBalanceWallet } from 'react-icons/md';
 
 export const Navbar = () => {
     const { user } = useAuth();
@@ -24,7 +24,6 @@ export const Navbar = () => {
         <nav className="sticky top-0 z-50 bg-white/95 dark:bg-[#0B0F19]/90 border-b border-gray-200 dark:border-white/5 shadow-sm backdrop-blur-xl">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
-                    {/* Logo */}
                     <Link to="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
                         <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
                             <AiFillDollarCircle className="text-white text-2xl" />
@@ -34,7 +33,6 @@ export const Navbar = () => {
                         </span>
                     </Link>
 
-                    {/* Nav Links */}
                     <div className="flex items-center gap-6">
                         <Link
                             to="/dashboard"
@@ -69,7 +67,17 @@ export const Navbar = () => {
                             <span className="hidden sm:inline font-medium">Analytics</span>
                         </Link>
 
-                        {/* Theme Toggle */}
+                        <Link
+                            to="/budget"
+                            className={`nav-link hover-lift-sm flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${isActive('/budget')
+                                ? 'nav-link-active bg-primary-500 text-white shadow-glow-green'
+                                : 'text-gray-700 dark:text-slate-100 hover:bg-primary-500/10'
+                                }`}
+                        >
+                            <MdAccountBalanceWallet className="text-lg" />
+                            <span className="hidden sm:inline font-medium">Budget</span>
+                        </Link>
+
                         <button
                             onClick={toggleTheme}
                             className="p-2.5 rounded-lg bg-gray-100/90 dark:bg-[#121826] border border-transparent dark:border-white/10 hover:bg-gray-200 dark:hover:bg-[#1f2937] shadow-sm dark:shadow-glass transition-all duration-200"
@@ -82,7 +90,6 @@ export const Navbar = () => {
                             )}
                         </button>
 
-                        {/* User Profile Dropdown */}
                         {user && (
                             <div className="relative">
                                 <button
@@ -95,10 +102,8 @@ export const Navbar = () => {
                                     <HiChevronDown className={`text-gray-600 dark:text-slate-200 transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`} />
                                 </button>
 
-                                {/* Dropdown Menu - Perfect Dark Mode */}
                                 {showDropdown && (
                                     <div className="absolute right-0 mt-3 w-72 z-50 profile-dropdown overflow-hidden transform origin-top-right animate-slide-down">
-                                        {/* User Info Header */}
                                         <div className="p-4 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-white/5 dark:to-white/0 border-b border-gray-200 dark:border-white/10">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white text-lg font-bold shadow-glow-green">
@@ -115,7 +120,6 @@ export const Navbar = () => {
                                             </div>
                                         </div>
 
-                                        {/* Menu Items */}
                                         <div className="p-2 bg-white/60 dark:bg-transparent space-y-1.5">
                                             <Link
                                                 to="/profile"
@@ -149,9 +153,16 @@ export const Navbar = () => {
                                                 <MdAnalytics className="profile-dropdown-item-icon text-lg" />
                                                 <span>Analytics</span>
                                             </Link>
+                                            <Link
+                                                to="/budget"
+                                                onClick={() => setShowDropdown(false)}
+                                                className="profile-dropdown-item text-left text-gray-700 dark:text-slate-100"
+                                            >
+                                                <MdAccountBalanceWallet className="profile-dropdown-item-icon text-lg" />
+                                                <span>Budget</span>
+                                            </Link>
                                         </div>
 
-                                        {/* Logout Button */}
                                         <div className="p-2 border-t border-gray-200/80 dark:border-white/10 bg-white/70 dark:bg-white/0">
                                             <button
                                                 onClick={handleLogout}

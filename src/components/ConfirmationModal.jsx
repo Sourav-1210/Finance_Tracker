@@ -5,20 +5,15 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message }
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
-            {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/60 backdrop-blur-md"
                 onClick={onClose}
             ></div>
-
-            {/* Modal */}
             <div className="glass-card max-w-sm w-full p-6 rounded-2xl shadow-glass-lg relative z-10 animate-slide-up">
-                {/* Icon */}
                 <div className="flex items-center justify-center w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full mx-auto mb-4 shadow-glass">
                     <HiExclamation className="text-3xl text-red-600 dark:text-red-400" />
                 </div>
 
-                {/* Content */}
                 <h3 className="text-xl font-bold text-center text-gray-900 dark:text-slate-50 mb-2">
                     {title || 'Are you sure?'}
                 </h3>
@@ -26,7 +21,6 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message }
                     {message || 'This action cannot be undone.'}
                 </p>
 
-                {/* Actions */}
                 <div className="flex gap-3">
                     <button
                         onClick={onClose}
