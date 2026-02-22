@@ -5,80 +5,47 @@ export const FinancialHealthScore = () => {
     const { getFinancialHealth } = useContext(TransactionContext);
     const health = getFinancialHealth();
 
-    const getStatusColor = (status) => {
+    const getStatusConfig = (status) => {
         switch (status) {
             case 'excellent':
-                return {
-                    bg: 'from-green-500 to-emerald-600',
-                    text: 'text-green-600 dark:text-green-400',
-                    ring: 'ring-green-500/30',
-                    label: 'Excellent',
-                };
+                return { color: '#10b981', label: 'Excellent', textClass: 'text-green-500' };
             case 'good':
-                return {
-                    bg: 'from-primary-500 to-primary-600',
-                    text: 'text-primary-600 dark:text-primary-400',
-                    ring: 'ring-primary-500/30',
-                    label: 'Good',
-                };
+                return { color: '#3b82f6', label: 'Good', textClass: 'text-blue-500' };
             case 'fair':
-                return {
-                    bg: 'from-yellow-500 to-amber-600',
-                    text: 'text-yellow-600 dark:text-yellow-400',
-                    ring: 'ring-yellow-500/30',
-                    label: 'Fair',
-                };
+                return { color: '#f59e0b', label: 'Fair', textClass: 'text-yellow-500' };
             case 'warning':
-                return {
-                    bg: 'from-orange-500 to-orange-600',
-                    text: 'text-orange-600 dark:text-orange-400',
-                    ring: 'ring-orange-500/30',
-                    label: 'Warning',
-                };
+                return { color: '#f97316', label: 'Warning', textClass: 'text-orange-500' };
             case 'critical':
-                return {
-                    bg: 'from-red-500 to-red-600',
-                    text: 'text-red-600 dark:text-red-400',
-                    ring: 'ring-red-500/30',
-                    label: 'Critical',
-                };
+                return { color: '#ef4444', label: 'Critical', textClass: 'text-red-500' };
             default:
-                return {
-                    bg: 'from-gray-500 to-gray-600',
-                    text: 'text-gray-600 dark:text-gray-400',
-                    ring: 'ring-gray-500/30',
-                    label: 'Unknown',
-                };
+                return { color: '#6b7280', label: 'Unknown', textClass: 'text-gray-500' };
         }
     };
 
-    const statusColors = getStatusColor(health.status);
-    const circumference = 2 * Math.PI * 70; 
+    const cfg = getStatusConfig(health.status);
+    const radius = 70;
+    const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = circumference - (health.score / 100) * circumference;
 
     return (
         <div className="glass-card p-6 rounded-2xl animate-fade-in transition-transform duration-300 hover:-translate-y-1">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white heading-glow mb-6">
-                Financial Health Score
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white heading-glow mb-4">
+                Financial Health
             </h3>
 
-            <div className="flex flex-col items-center justify-center py-4">
-                <div className="relative w-48 h-48">
-                    <svg className="transform -rotate-90 w-48 h-48">
+            <div className="flex flex-col items-center justify-center py-2">
+                {/* Ring chart */}
+                <div className="relative w-44 h-44">
+                    <svg className="transform -rotate-90 w-44 h-44">
                         <circle
-                            cx="96"
-                            cy="96"
-                            r="70"
-                            stroke="currentColor"
+                            cx="88" cy="88" r={radius}
+                            stroke="rgba(107, 114, 128, 0.2)"
                             strokeWidth="12"
                             fill="transparent"
-                            className="text-gray-200 dark:text-gray-700"
                         />
                         <circle
-                            cx="96"
-                            cy="96"
-                            r="70"
-                            stroke="url(#gradient)"
+                            cx="88" cy="88" r={radius}
+                            stroke={cfg.color}
                             strokeWidth="12"
                             fill="transparent"
                             strokeDasharray={circumference}
@@ -86,46 +53,42 @@ export const FinancialHealthScore = () => {
                             strokeLinecap="round"
                             className="transition-all duration-1000 ease-out"
                         />
-                        <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" className={statusColors.bg.includes('green') ? 'text-green-500' : statusColors.bg.includes('primary') ? 'text-primary-500' : statusColors.bg.includes('yellow') ? 'text-yellow-500' : statusColors.bg.includes('orange') ? 'text-orange-500' : 'text-red-500'} stopColor="currentColor" />
-                                <stop offset="100%" className={statusColors.bg.includes('emerald') ? 'text-emerald-600' : statusColors.bg.includes('primary') ? 'text-primary-600' : statusColors.bg.includes('amber') ? 'text-amber-600' : statusColors.bg.includes('orange') ? 'text-orange-600' : 'text-red-600'} stopColor="currentColor" />
-                            </linearGradient>
-                        </defs>
                     </svg>
 
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                        <p className={`text-5xl font-bold ${statusColors.text}`}>
+                        <p className={`text-4xl font-bold ${cfg.textClass}`}>
                             {health.score}
                         </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            out of 100
+                        <p className="text-xs text-gray-400 dark:text-slate-500 mt-0.5 font-medium">
+                            / 100
                         </p>
                     </div>
                 </div>
 
-                <div className={`mt-6 px-6 py-2.5 rounded-full bg-gradient-to-r ${statusColors.bg} shadow-lg`}>
-                    <p className="text-white font-semibold text-sm">
-                        {statusColors.label}
+                {/* Status label */}
+                <div className="mt-4 px-5 py-1.5 rounded-full bg-gray-100 dark:bg-slate-800">
+                    <p className={`font-semibold text-sm ${cfg.textClass}`}>
+                        {cfg.label}
                     </p>
                 </div>
 
-                <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl w-full">
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                {/* Savings rate */}
+                <div className="mt-5 p-4 bg-gray-50 dark:bg-slate-800/60 rounded-xl w-full border border-gray-100 dark:border-white/5">
+                    <div className="flex items-center justify-between mb-1">
+                        <p className="text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                             Savings Rate
                         </p>
-                        <p className={`text-2xl font-bold ${statusColors.text}`}>
+                        <p className={`text-xl font-bold ${cfg.textClass}`}>
                             {health.savingsRate}%
                         </p>
                     </div>
-                    <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-gray-400 dark:text-slate-500 leading-relaxed">
                         {parseFloat(health.savingsRate) >= 30 && 'Outstanding! Keep up the excellent work.'}
                         {parseFloat(health.savingsRate) >= 20 && parseFloat(health.savingsRate) < 30 && 'Great job! You\'re saving well.'}
                         {parseFloat(health.savingsRate) >= 10 && parseFloat(health.savingsRate) < 20 && 'Good progress. Try to save a bit more.'}
                         {parseFloat(health.savingsRate) >= 0 && parseFloat(health.savingsRate) < 10 && 'Consider increasing your savings.'}
                         {parseFloat(health.savingsRate) < 0 && 'Warning: Spending exceeds income.'}
-                    </div>
+                    </p>
                 </div>
             </div>
         </div>

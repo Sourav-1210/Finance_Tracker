@@ -22,7 +22,7 @@ export const TopCategoriesCard = () => {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                     Top Spending Categories
                 </h3>
-                <div className="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400">
+                <div className="flex items-center justify-center h-64 text-gray-400 dark:text-slate-500 text-sm">
                     No category data available
                 </div>
             </div>
@@ -31,43 +31,46 @@ export const TopCategoriesCard = () => {
 
     return (
         <div className="glass-card p-6 rounded-2xl animate-fade-in transition-transform duration-300 hover:-translate-y-1">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white heading-glow mb-6">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white heading-glow mb-5">
                 Top Spending Categories
             </h3>
-            <div className="space-y-5">
-                {topCategories.map((item, index) => (
-                    <div key={item.category} className="space-y-2">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white text-sm font-bold shadow-glow-green">
-                                    {index + 1}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900 dark:text-white capitalize">
+            <div className="space-y-4">
+                {topCategories.map((item, index) => {
+                    const color = CATEGORY_COLORS[item.category] || '#6b7280';
+                    return (
+                        <div key={item.category}>
+                            <div className="flex items-center justify-between mb-1.5">
+                                <div className="flex items-center gap-3">
+                                    {/* Rank badge */}
+                                    <div className="flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold bg-gradient-to-br from-primary-500 to-primary-600 text-white">
+                                        {index + 1}
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-700 dark:text-slate-200 capitalize">
                                         {item.category}
+                                    </span>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-sm font-bold text-gray-900 dark:text-white">
+                                        ₹{item.amount.toLocaleString()}
                                     </p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                                        {item.percentage.toFixed(1)}% of total
+                                    <p className="text-xs text-gray-400 dark:text-slate-500">
+                                        {item.percentage.toFixed(1)}%
                                     </p>
                                 </div>
                             </div>
-                            <div className="text-right">
-                                <p className="text-lg font-bold text-gray-900 dark:text-white">
-                                    ₹{item.amount.toLocaleString()}
-                                </p>
+                            {/* Progress bar */}
+                            <div className="relative w-full h-1.5 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                                <div
+                                    className="absolute top-0 left-0 h-full rounded-full transition-all duration-700"
+                                    style={{
+                                        width: `${item.percentage}%`,
+                                        backgroundColor: color,
+                                    }}
+                                />
                             </div>
                         </div>
-                        <div className="relative w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                            <div
-                                className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
-                                style={{
-                                    width: `${item.percentage}%`,
-                                    backgroundColor: CATEGORY_COLORS[item.category] || '#6b7280',
-                                }}
-                            />
-                        </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

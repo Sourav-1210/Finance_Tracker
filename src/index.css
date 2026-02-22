@@ -17,11 +17,15 @@
 
   html.dark {
     /* DARK MODE - Deep fintech navy theme */
-    --bg-body: #0B0F19; /* main app background */
-    --bg-card: #121826; /* cards & panels */
+    --bg-body: #0B0F19;
+    /* main app background */
+    --bg-card: #121826;
+    /* cards & panels */
     --bg-elevated-soft: #121826;
-    --text-primary: #E6EDF3; /* primary text */
-    --text-secondary: #9AA4B2; /* secondary / muted text */
+    --text-primary: #E6EDF3;
+    /* primary text */
+    --text-secondary: #9AA4B2;
+    /* secondary / muted text */
     --border-subtle: rgba(255, 255, 255, 0.08);
     --accent-teal: #06b6d4;
     --accent-blue: #22d3ee;
@@ -37,8 +41,8 @@
   /* PERFECT DARK MODE - applied when <html> has .dark (ThemeContext) */
   .dark body {
     background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.06), transparent 55%),
-                radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.07), transparent 60%),
-                var(--bg-body);
+      radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.07), transparent 60%),
+      var(--bg-body);
     color: var(--text-primary);
   }
 
@@ -103,8 +107,8 @@
   .glass-card {
     @apply rounded-xl border shadow-glass;
     background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), transparent 55%),
-                radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.08), transparent 60%),
-                var(--bg-card);
+      radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.08), transparent 60%),
+      var(--bg-card);
     border-color: var(--border-subtle);
   }
 
@@ -246,7 +250,8 @@
   }
 
   .dark .nav-link span {
-    color: #a5b4fc !important; /* soft indigo for inactive items */
+    color: #a5b4fc !important;
+    /* soft indigo for inactive items */
     text-shadow: 0 0 6px rgba(79, 70, 229, 0.35);
   }
 
@@ -258,7 +263,8 @@
   }
 
   .dark .nav-link-active span {
-    color: #E6EDF3 !important; /* primary text */
+    color: #E6EDF3 !important;
+    /* primary text */
     text-shadow:
       0 0 10px rgba(34, 211, 238, 0.45),
       0 0 20px rgba(56, 189, 248, 0.55);
@@ -270,7 +276,8 @@
   }
 
   .dark .profile-dropdown {
-    background: rgba(18, 24, 38, 0.95); /* #121826 with 95% opacity */
+    background: rgba(18, 24, 38, 0.95);
+    /* #121826 with 95% opacity */
     border-color: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(14px);
     box-shadow:
@@ -283,12 +290,14 @@
   }
 
   .dark .profile-dropdown-item {
-    color: #9AA4B2; /* secondary text */
+    color: #9AA4B2;
+    /* secondary text */
   }
 
   .dark .profile-dropdown-item:hover {
     background-color: #1A2233;
-    color: #E6EDF3; /* primary text on hover */
+    color: #E6EDF3;
+    /* primary text on hover */
   }
 
   .dark .profile-dropdown-item-icon {
@@ -313,6 +322,92 @@
 
   .dark .profile-dropdown-header-email {
     color: #9AA4B2 !important;
+  }
+
+  /* BRAND LETTER APPEAR - individual letter stagger animation */
+  @keyframes letterAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    70% {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes letterShimmer {
+
+    0%,
+    100% {
+      color: #10b981;
+    }
+
+    50% {
+      color: #1e293b;
+    }
+  }
+
+  .brand-letter {
+    display: inline-block;
+    opacity: 0;
+    color: #10b981;
+    animation:
+      letterAppear 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+      letterShimmer 2.5s ease-in-out infinite 1s;
+  }
+
+  .dark .brand-letter {
+    color: #10b981;
+  }
+
+  /* BRAND TEXT SHIMMER - FinanceTracker logo animation */
+  @keyframes brandShimmer {
+    0% {
+      background-position: -200% center;
+    }
+
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .brand-text-shimmer {
+    background: linear-gradient(90deg,
+        #475569 0%,
+        #475569 20%,
+        #10b981 40%,
+        #6ee7b7 50%,
+        #10b981 60%,
+        #475569 80%,
+        #475569 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: brandShimmer 2s linear infinite;
+  }
+
+  .dark .brand-text-shimmer {
+    background: linear-gradient(90deg,
+        #94a3b8 0%,
+        #94a3b8 20%,
+        #10b981 40%,
+        #6ee7b7 50%,
+        #10b981 60%,
+        #94a3b8 80%,
+        #94a3b8 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: brandShimmer 2s linear infinite;
   }
 
   /* SHADOWS */

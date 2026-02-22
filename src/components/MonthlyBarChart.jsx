@@ -21,7 +21,6 @@ export const MonthlyBarChart = () => {
 
         allTransactions.forEach((t) => {
             if (!t.date) return;
-
             const date = new Date(t.date);
             const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
 
@@ -70,16 +69,18 @@ export const MonthlyBarChart = () => {
                 data: monthlyData.income,
                 backgroundColor: 'rgba(16, 185, 129, 0.8)',
                 borderColor: 'rgba(16, 185, 129, 1)',
-                borderWidth: 2,
+                borderWidth: 0,
                 borderRadius: 8,
+                borderSkipped: false,
             },
             {
                 label: 'Expense',
                 data: monthlyData.expense,
                 backgroundColor: 'rgba(239, 68, 68, 0.8)',
                 borderColor: 'rgba(239, 68, 68, 1)',
-                borderWidth: 2,
+                borderWidth: 0,
                 borderRadius: 8,
+                borderSkipped: false,
             },
         ],
     };
@@ -92,26 +93,16 @@ export const MonthlyBarChart = () => {
                 position: 'top',
                 labels: {
                     padding: 15,
-                    font: {
-                        size: 13,
-                        family: 'Inter',
-                        weight: '600',
-                    },
+                    font: { size: 13, family: 'Inter', weight: '600' },
                     usePointStyle: true,
-                    color: typeof document !== 'undefined' && document.body.classList.contains('dark') ? '#ffffff' : '#6b7280',
+                    color: typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? '#ffffff' : '#6b7280',
                 },
             },
             tooltip: {
                 backgroundColor: 'rgba(0, 0, 0, 0.8)',
                 padding: 12,
-                titleFont: {
-                    size: 14,
-                    family: 'Inter',
-                },
-                bodyFont: {
-                    size: 13,
-                    family: 'Inter',
-                },
+                titleFont: { size: 14, family: 'Inter' },
+                bodyFont: { size: 13, family: 'Inter' },
                 callbacks: {
                     label: (context) => {
                         const label = context.dataset.label || '';
@@ -123,28 +114,18 @@ export const MonthlyBarChart = () => {
         },
         scales: {
             x: {
-                grid: {
-                    display: false,
-                },
+                grid: { display: false },
                 ticks: {
-                    color: typeof document !== 'undefined' && document.body.classList.contains('dark') ? '#ffffff' : '#6b7280',
-                    font: {
-                        size: 12,
-                        family: 'Inter',
-                    },
+                    color: typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? '#ffffff' : '#6b7280',
+                    font: { size: 11, family: 'Inter' },
                 },
             },
             y: {
                 beginAtZero: true,
-                grid: {
-                    color: 'rgba(107, 114, 128, 0.1)',
-                },
+                grid: { color: 'rgba(107, 114, 128, 0.1)' },
                 ticks: {
-                    color: typeof document !== 'undefined' && document.body.classList.contains('dark') ? '#ffffff' : '#6b7280',
-                    font: {
-                        size: 12,
-                        family: 'Inter',
-                    },
+                    color: typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? '#ffffff' : '#6b7280',
+                    font: { size: 12, family: 'Inter' },
                     callback: (value) => `₹${value.toLocaleString()}`,
                 },
             },
@@ -156,7 +137,7 @@ export const MonthlyBarChart = () => {
             <h3 className="text-xl font-bold text-gray-900 dark:text-white heading-glow mb-6">
                 Monthly Overview
             </h3>
-            <div className="h-80">
+            <div className="h-72">
                 <Bar data={data} options={options} />
             </div>
         </div>

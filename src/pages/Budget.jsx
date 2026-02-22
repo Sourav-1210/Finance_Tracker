@@ -77,7 +77,7 @@ export const Budget = () => {
                                 Budget Planner
                             </h1>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-400 ml-15">
+                        <p className="text-gray-600 dark:text-gray-400 ml-14">
                             Set monthly category limits and track your spending
                         </p>
                     </div>

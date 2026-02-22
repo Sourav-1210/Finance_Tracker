@@ -42,8 +42,9 @@ export const SpendingPieChart = () => {
             {
                 data: amounts,
                 backgroundColor: categories.map((cat) => CATEGORY_COLORS[cat] || '#6b7280'),
-                borderColor: categories.map(() => 'rgba(255, 255, 255, 0.8)'),
+                borderColor: 'rgba(255, 255, 255, 0.1)',
                 borderWidth: 2,
+                hoverOffset: 8,
             },
         ],
     };
@@ -56,30 +57,23 @@ export const SpendingPieChart = () => {
                 position: 'bottom',
                 labels: {
                     padding: 15,
-                    font: {
-                        size: 12,
-                        family: 'Inter',
-                    },
+                    font: { size: 12, family: 'Inter', weight: '500' },
                     usePointStyle: true,
-                    color: typeof document !== 'undefined' && document.body.classList.contains('dark') ? '#ffffff' : '#6b7280',
+                    color: typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? '#ffffff' : '#6b7280',
                 },
             },
             tooltip: {
                 backgroundColor: 'rgba(0, 0, 0, 0.8)',
                 padding: 12,
-                titleFont: {
-                    size: 14,
-                    family: 'Inter',
-                },
-                bodyFont: {
-                    size: 13,
-                    family: 'Inter',
-                },
+                titleFont: { size: 13, family: 'Inter', weight: '600' },
+                bodyFont: { size: 12, family: 'Inter' },
                 callbacks: {
                     label: (context) => {
                         const label = context.label || '';
                         const value = context.parsed || 0;
-                        return `${label}: ₹${value.toLocaleString()}`;
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const pct = ((value / total) * 100).toFixed(1);
+                        return `${label}: ₹${value.toLocaleString()} (${pct}%)`;
                     },
                 },
             },
@@ -91,7 +85,7 @@ export const SpendingPieChart = () => {
             <h3 className="text-xl font-bold text-gray-900 dark:text-white heading-glow mb-6">
                 Spending by Category
             </h3>
-            <div className="h-80">
+            <div className="h-72">
                 <Pie data={data} options={options} />
             </div>
         </div>
